@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌍 지구 환경 수사대: 불평등의 비밀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-comic { font-family: 'Jua', sans-serif; }
+
+        /* Webtoon Comic Styles */
+        .comic-panel {
+            background: #fff;
+            border: 4px solid #333;
+            border-radius: 12px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out;
+        }
+        .comic-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Speech Bubbles */
+        .speech-bubble {
+            position: absolute;
+            background: #fff;
+            border: 3px solid #333;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.1rem;
+            z-index: 10;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            display: block;
+            width: 0;
+            z-index: 1;
+        }
+        .bubble-dr::after {
+            bottom: -15px; right: 20px;
+            border-width: 15px 15px 0 0;
+            border-color: #333 transparent transparent transparent;
+        }
+        .bubble-dl::after {
+            bottom: -15px; left: 20px;
+            border-width: 15px 0 0 15px;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* 3D Flip Card CSS */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .group:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-inner { transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25%, 75% { transform: translateX(-5px) rotate(-2deg); }
+            50% { transform: translateX(5px) rotate(2deg); }
+        }
+        .animate-shake { animation: shake 0.5s ease-in-out infinite; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+
+        /* Report Paper Style */
+        .paper-bg {
+            background-color: #fff;
+            background-image: 
+                linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+                linear-gradient(#eee .1em, transparent .1em);
+            background-size: 100% 1.2em;
+            border: 1px solid #ccc;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        #intro-screen { transition: opacity 0.8s ease-out; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- ================= INTRO SCREEN (WEBTOON) ================= -->
+    <div id="intro-screen" class="min-h-screen bg-yellow-100 flex flex-col items-center justify-center p-4 py-10 fixed inset-0 z-50 overflow-y-auto">
+        
+        <h1 class="font-comic text-4xl md:text-5xl text-center text-yellow-800 mb-8 mt-10">
+            🤔 억울해! 쓰레기 버린 사람 따로, 치우는 사람 따로?
+        </h1>
+
+        <div class="max-w-3xl w-full space-y-6">
+            <!-- Panel 1 -->
+            <div class="comic-panel visible bg-blue-50 h-64 md:h-80 flex items-end justify-center p-4 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjQwJSIgZmlsbD0iI2UwdmZmZiIgLz48L3N2Zz4=')] bg-no-repeat bg-bottom bg-cover" style="background-color: #dbeafe;">
+                <div class="speech-bubble bubble-dr top-6 left-6 max-w-[200px]">
+                    아싸! 과자 꿀맛! 😆<br><span class="text-sm text-gray-500">(쓰레기는 바닥에 휙~)</span>
+                </div>
+                <div class="text-7xl md:text-8xl mb-4 transform translate-x-10">🏃‍♂️🍫</div>
+                <div class="text-4xl absolute bottom-8 right-10">🍬🗑️</div>
+                <div class="text-4xl absolute bottom-12 right-32">🥤</div>
+            </div>
+
+            <!-- Panel 2 -->
+            <div class="comic-panel visible bg-red-50 h-64 md:h-80 flex items-center justify-between p-8">
+                <div class="text-8xl md:text-9xl animate-shake">👨‍🏫💢</div>
+                <div class="speech-bubble bubble-dl top-10 right-10 max-w-[250px] border-red-500 text-red-600 font-bold text-xl">
+                    너희들!! 교실을 왜 이렇게 어질러 놨어!! 빨리 다 치워!!! 🔥
+                </div>
+                <div class="text-6xl md:text-7xl mt-20">😰</div>
+                <div class="text-6xl md:text-7xl mt-20">😭</div>
+            </div>
+
+            <!-- Panel 3 -->
+            <div class="comic-panel visible bg-gray-100 h-64 md:h-80 flex items-center justify-center p-8 flex-col relative">
+                <div class="speech-bubble bubble-dr top-8 mb-4 max-w-[300px] text-center">
+                    네?! 저희가 안 버렸는데요?! 억울해요 ㅠㅠ 💦
+                </div>
+                <div class="flex gap-4 mt-10">
+                    <div class="text-7xl md:text-8xl">🧹👧</div>
+                    <div class="text-7xl md:text-8xl">🗑️👦</div>
+                </div>
+            </div>
+
+            <!-- Conclusion Panel -->
+            <div class="comic-panel visible bg-green-100 h-auto p-8 text-center border-green-600 border-8">
+                <h2 class="font-comic text-3xl md:text-4xl text-green-700 mb-4">
+                    앗, 잠깐! ✋<br>이 억울한 상황, 어디서 많이 본 것 같지 않아?
+                </h2>
+                <p class="text-lg md:text-xl font-bold text-gray-700 mb-6">
+                    놀랍게도 교실뿐만 아니라 <span class="text-red-500 text-2xl">지구 전체</span>에서도<br>
+                    비슷한 일이 벌어지고 있어!
+                </p>
+                <button onclick="startInvestigation()" class="font-comic text-2xl bg-yellow-400 hover:bg-yellow-500 text-gray-900 py-4 px-8 rounded-full shadow-[4px_4px_0px_rgba(0,0,0,0.8)] border-4 border-black transition-transform transform hover:-translate-y-1 hover:shadow-[6px_6px_0px_rgba(0,0,0,0.8)] animate-pulse">
+                    진짜 범인 찾으러 가기! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div id="main-content" class="hidden min-h-screen pb-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiNkY2ZjZTciLz48L3N2Zz4=')]">
+        
+        <!-- Header -->
+        <header class="text-center pt-16 pb-12 px-4 max-w-4xl mx-auto">
+            <h1 class="font-comic text-5xl md:text-6xl text-green-700 mb-6 animate-float drop-shadow-sm">
+                🌍 지구 환경 수사대:<br>
+                <span class="text-orange-500">불평등의 비밀을 찾아라!</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed bg-white p-6 rounded-2xl shadow-md border-2 border-green-200">
+                안녕, 수사대원들! 👋 방금 만화 봤지?<br>
+                환경 오염의 원인을 만든 <strong>'선진국(또는 우리)'</strong>과 피해를 몽땅 뒤집어쓴 <strong>'개발도상국'</strong>.<br>
+                <strong class="text-green-600">아래 카드를 마우스로 올려서 숨겨진 진실을 뒤집어봐!</strong><br>
+                가장 관심 가는 주제 1개를 골라서 내 수행평가 발표 자료로 만들어보자!
+            </p>
+        </header>
+
+        <!-- Main Cards Section (7 Topics) -->
+        <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: 기후변화 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-blue-200 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">🏭🚗</div>
+                        <h2 class="text-3xl text-blue-600 mb-4 font-comic">1. 기후변화의 범인?</h2>
+                        <p class="text-lg font-bold text-gray-700">"에어컨 빵빵, 자동차 쌩쌩!"</p>
+                        <p class="mt-2 text-gray-500 text-sm">지구를 뜨겁게 만드는 온실가스는 주로 공장이 많고 잘 사는 <strong>선진국</strong>들이 배출했어.</p>
+                        <span class="mt-6 text-sm bg-blue-100 text-blue-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-blue-600 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-blue-800">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">🌊🏜️</div>
+                            <h3 class="text-2xl text-center text-yellow-300 mb-2 font-comic">억울한 피해자 등장!</h3>
+                            <p class="text-sm">정작 가뭄과 홍수, 해수면 상승으로 나라가 물에 잠기는 곳은 온실가스를 거의 배출하지 않은 <strong>개도국(투발루 등)</strong>이야.</p>
+                        </div>
+                        <div class="mt-4 bg-blue-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-blue-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#투발루_해수면상승 #기후불평등 #온실가스_배출량_순위</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: 팜유 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-green-300 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">🍫🍜</div>
+                        <h2 class="text-3xl text-green-600 mb-4 font-comic">2. 내 간식의 비밀</h2>
+                        <p class="text-lg font-bold text-gray-700">"우리가 매일 먹는 달콤함"</p>
+                        <p class="mt-2 text-gray-500 text-sm">라면, 과자에 꼭 들어가는 '팜유'. 이 팜유를 대량으로 소비하는 건 <strong>우리들(선진국)</strong>이야.</p>
+                        <span class="mt-6 text-sm bg-green-100 text-green-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-green-700 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-green-900">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">🔥🦧</div>
+                            <h3 class="text-2xl text-center text-yellow-300 mb-2 font-comic">오랑우탄이 집을 잃었어!</h3>
+                            <p class="text-sm">팜유를 만들기 위해 <strong>인도네시아의 열대우림</strong>을 불태워 농장으로 만들어. 숲이 사라지고 동물들이 쫓겨나는 게 대가야.</p>
+                        </div>
+                        <div class="mt-4 bg-green-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-green-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#인도네시아_열대우림_파괴 #팜유_환경오염 #오랑우탄_멸종위기</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: 전자 쓰레기 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-gray-400 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">📱💻</div>
+                        <h2 class="text-3xl text-gray-700 mb-4 font-comic">3. 쓰레기 떠넘기기</h2>
+                        <p class="text-lg font-bold text-gray-700">"최신폰 나왔네? 바꿔야지!"</p>
+                        <p class="mt-2 text-gray-500 text-sm">풍족한 선진국 사람들은 전자기기를 금방 바꿔. 우리가 쓰다 버린 폐전자제품은 다 어디로 갈까?</p>
+                        <span class="mt-6 text-sm bg-gray-100 text-gray-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-gray-800 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-gray-900">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">☠️🗑️</div>
+                            <h3 class="text-2xl text-center text-red-400 mb-2 font-comic">독성 연기 마시는 아이들</h3>
+                            <p class="text-sm">선진국이 버린 전자쓰레기는 <strong>가나 등 개도국</strong>으로 불법 수출돼. 아이들이 금속을 캐려 불을 피우다 독성에 병들고 있어.</p>
+                        </div>
+                        <div class="mt-4 bg-gray-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-gray-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#가나_아그보그블로시 #전자쓰레기_수출 #e-waste_불평등</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: 패스트패션 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-pink-300 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">👗🛍️</div>
+                        <h2 class="text-3xl text-pink-600 mb-4 font-comic">4. 유행의 그림자</h2>
+                        <p class="text-lg font-bold text-gray-700">"싸니까 깔별로 사야지!"</p>
+                        <p class="mt-2 text-gray-500 text-sm">유행 따라 빠르게 찍어내고 버리는 <strong>패스트패션(대량 소비)</strong>. 헌 옷 수거함에 넣은 옷은 다 재활용될까?</p>
+                        <span class="mt-6 text-sm bg-pink-100 text-pink-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-pink-600 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-pink-800">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">🏜️👕</div>
+                            <h3 class="text-2xl text-center text-yellow-300 mb-2 font-comic">사막에 쌓인 옷 산</h3>
+                            <p class="text-sm">아니! 대부분 <strong>칠레 아타카마 사막이나 가나 해변</strong>에 버려져 거대한 쓰레기 산을 만들어. 옷이 썩으면서 심각한 오염을 일으키지.</p>
+                        </div>
+                        <div class="mt-4 bg-pink-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-pink-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#칠레_아타카마_옷사막 #패스트패션_쓰레기 #의류폐기물_수출</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: 식량 안보 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-orange-300 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">🍔🗑️</div>
+                        <h2 class="text-3xl text-orange-600 mb-4 font-comic">5. 식량의 양극화</h2>
+                        <p class="text-lg font-bold text-gray-700">"풍족한 식탁 뒤의 진실"</p>
+                        <p class="mt-2 text-gray-500 text-sm">선진국은 매일 엄청난 음식물을 버리고, 돈만 있으면 언제든 식량을 수입할 수 있어 안심해.</p>
+                        <span class="mt-6 text-sm bg-orange-100 text-orange-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-orange-600 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-orange-800">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">🌾📉</div>
+                            <h3 class="text-2xl text-center text-yellow-200 mb-2 font-comic">흔들리는 밥상</h3>
+                            <p class="text-sm">하지만 <strong>곡물 수입 의존도가 높은 개도국</strong>은 전쟁이나 기후변화로 곡물 가격이 조금만 올라도 당장 굶주림에 시달리게 돼.</p>
+                        </div>
+                        <div class="mt-4 bg-orange-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-orange-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#식량안보_불평등 #곡물가격_폭등_기아 #식량자급률</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: 물 부족 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-cyan-300 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">👖☕</div>
+                        <h2 class="text-3xl text-cyan-600 mb-4 font-comic">6. 물을 뺏어온다?</h2>
+                        <p class="text-lg font-bold text-gray-700">"보이지 않는 물(가상수)"</p>
+                        <p class="mt-2 text-gray-500 text-sm">커피 한 잔, 청바지 한 벌을 만들 때 엄청난 양의 물이 필요해. 선진국은 이 '가상수'를 엄청나게 수입(소비)하지.</p>
+                        <span class="mt-6 text-sm bg-cyan-100 text-cyan-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-cyan-600 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-cyan-800">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">💧🚰</div>
+                            <h3 class="text-2xl text-center text-yellow-300 mb-2 font-comic">말라가는 호수</h3>
+                            <p class="text-sm">수출용 목화와 커피를 기르느라, 정작 <strong>생산 국가(개도국) 주민들이 마실 우물</strong>이 말라가고 있어. 물 불평등이 심각해.</p>
+                        </div>
+                        <div class="mt-4 bg-cyan-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-cyan-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#가상수_무역 #커피_물발자국 #아랄해_고갈</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7: 미세먼지와 대기오염 -->
+            <div class="group h-[26rem] perspective-1000 cursor-pointer">
+                <div class="relative w-full h-full transform-style-3d flip-card-inner shadow-xl rounded-2xl">
+                    <!-- 앞면 (원인 제공) -->
+                    <div class="absolute w-full h-full backface-hidden bg-white rounded-2xl border-4 border-purple-300 p-6 flex flex-col items-center justify-center text-center">
+                        <div class="text-6xl mb-4">🏭😷</div>
+                        <h2 class="text-3xl text-purple-600 mb-4 font-comic">7. 국경을 넘는 불청객</h2>
+                        <p class="text-lg font-bold text-gray-700">"값싼 물건 뒤의 시커먼 연기"</p>
+                        <p class="mt-2 text-gray-500 text-sm">우리가 쓰는 싼 물건들을 만들기 위해 <strong>세계의 공장(개발도상국 등)</strong>에서는 오늘도 엄청난 화석연료를 태우며 매연을 뿜어내.</p>
+                        <span class="mt-6 text-sm bg-purple-100 text-purple-800 py-1 px-3 rounded-full animate-bounce">마우스 올려서 뒤집기 🔄</span>
+                    </div>
+                    <!-- 뒷면 (피해 상황) -->
+                    <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-purple-700 text-white rounded-2xl p-6 flex flex-col justify-between border-4 border-purple-900">
+                        <div>
+                            <div class="text-5xl mb-2 text-center">🌧️🌪️</div>
+                            <h3 class="text-2xl text-center text-yellow-300 mb-2 font-comic">숨막히는 이웃과 자연</h3>
+                            <p class="text-sm">바람을 타고 날아온 <strong>미세먼지와 황사</strong>는 이웃 나라의 숨통을 조이고, <strong>산성비</strong>가 되어 애꿎은 숲과 문화재를 녹아내리게 해.</p>
+                        </div>
+                        <div class="mt-4 bg-purple-900/50 p-3 rounded-lg text-left">
+                            <p class="text-xs text-purple-300 font-bold mb-1">🔍 추천 검색 키워드</p>
+                            <p class="text-sm font-mono text-white">#대기오염_국경이동 #미세먼지_불평등 #산성비_피해</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ================= RUBRIC GUIDE SECTION ================= -->
+        <section class="max-w-5xl mx-auto mt-24 px-4">
+            <div class="bg-white rounded-3xl shadow-xl border-t-[10px] border-yellow-400 p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl text-center text-gray-800 mb-4 font-comic">📑 지속가능한 세계 만들기: <span class="text-yellow-600">수행평가 만점 공략집</span></h2>
+                <p class="text-center text-gray-600 mb-10 text-lg">선생님이 주신 평가 기준(루브릭)을 완벽하게 맞추려면 어떻게 써야 할까?</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 문제 파악하기 -->
+                    <div class="bg-red-50 p-6 rounded-2xl border-2 border-red-200">
+                        <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center gap-2">
+                            <span class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg">1</span> 
+                            문제 파악하기
+                        </h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold w-24 shrink-0">① 현황 파악:</span> 
+                                <span class="leading-relaxed">인터넷에서 <strong>구체적인 사례 사진과 통계 수치</strong>를 꼭 찾아서 넣어! (예: "매년 몇 톤이 버려지는가?")</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold w-24 shrink-0">② 원인 분석:</span> 
+                                <span class="leading-relaxed">이 문제가 <strong class="underline decoration-red-300">왜</strong> 발생했는지 논리적으로 써야 해. (예: "사람들이 유행에 따라 옷을 빨리 버려서")</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold w-24 shrink-0">③ 영향 범위:</span> 
+                                <span class="leading-relaxed">이 문제가 땅, 물, 공기, 그리고 사람들의 건강에 어떤 피해를 주는지 적어봐.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-600 font-bold w-24 shrink-0">④ 지역 비교:</span> 
+                                <span class="leading-relaxed">가장 중요해! <strong>선진국(원인 제공) vs 개발도상국(피해)</strong>의 억울한 상황을 확실하게 비교해서 보여줘.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 실천 방안 세우기 -->
+                    <div class="bg-green-50 p-6 rounded-2xl border-2 border-green-200">
+                        <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-2">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg">2</span> 
+                            실천 방안 세우기
+                        </h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold w-24 shrink-0">① 4가지 차원:</span> 
+                                <span class="leading-relaxed">해결책을 하나만 쓰면 안 돼! <strong>개인 / 지역사회(학교) / 국가 / 국제 사회</strong>로 딱딱 나누어서 써야 점수를 받아.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold w-24 shrink-0">② 구체성:</span> 
+                                <span class="leading-relaxed">"환경을 사랑하자" (X) 👉 "중고 거래 앱으로 한 달에 1번 헌옷 사기" (O) 이렇게 구체적으로!</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold w-24 shrink-0">③ 현실성:</span> 
+                                <span class="leading-relaxed">중학교 2학년인 너희가 당장 실천할 수 있거나, 진짜로 법이 만들어질 수 있는 현실적인 방법이어야 해.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600 font-bold w-24 shrink-0">④ 지속가능성:</span> 
+                                <span class="leading-relaxed">하루하고 끝나는 게 아니라, 미래 세대까지 꾸준히 이어질 수 있는 근본적인 대책인지 확인해.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-blue-50 rounded-2xl p-6 border-2 border-blue-200">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 font-comic flex items-center gap-2">
+                        🌐 자료 조사 꿀단지 (도움되는 한국어 공식 사이트)
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">키워드를 복사해서 아래 공식 사이트나 구글에 검색해봐! 훨씬 정확한 통계 자료를 얻을 수 있어.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="https://www.greenpeace.org/korea/" target="_blank" class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition text-center hover:-translate-y-1">
+                            <span class="text-2xl mb-2 block">🌍</span>
+                            <span class="text-sm font-bold text-gray-800">그린피스 한국</span>
+                        </a>
+                        <a href="https://www.wwfkorea.or.kr/" target="_blank" class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition text-center hover:-translate-y-1">
+                            <span class="text-2xl mb-2 block">🐼</span>
+                            <span class="text-sm font-bold text-gray-800">WWF 세계자연기금</span>
+                        </a>
+                        <a href="https://kosis.kr/" target="_blank" class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition text-center hover:-translate-y-1">
+                            <span class="text-2xl mb-2 block">📊</span>
+                            <span class="text-sm font-bold text-gray-800">KOSIS 국가통계포털</span>
+                        </a>
+                        <a href="http://www.climate.go.kr/" target="_blank" class="block bg-white p-4 rounded-xl shadow hover:shadow-lg transition text-center hover:-translate-y-1">
+                            <span class="text-2xl mb-2 block">🌦️</span>
+                            <span class="text-sm font-bold text-gray-800">기상청 기후정보포털</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Toggle Button for Perfect Example -->
+                <div class="mt-12 text-center">
+                    <button onclick="toggleExample()" class="bg-gray-800 text-white font-bold py-4 px-8 rounded-full text-xl hover:bg-gray-700 transition shadow-lg flex items-center justify-center gap-3 mx-auto transform hover:scale-105">
+                        <span>🌟 A+ 완벽 예시 보기 (패스트패션 편)</span>
+                        <svg id="arrow-icon" class="w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+
+                <!-- ================= PERFECT EXAMPLE (HIDDEN BY DEFAULT) ================= -->
+                <div id="perfect-example" class="hidden mt-8 transition-all duration-500">
+                    <div class="paper-bg p-8 md:p-12 rounded-xl relative">
+                        <!-- A+ Stamp -->
+                        <div class="absolute top-4 right-4 text-red-500 border-4 border-red-500 rounded-full p-2 transform rotate-12 opacity-80 pointer-events-none">
+                            <div class="font-bold text-4xl font-comic">A+</div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-center mb-2">수행평가 보고서 (예시)</h3>
+                        <h4 class="text-3xl text-center text-pink-700 mb-8 font-comic">주제: 유행의 그림자, 패스트패션이 칠레 사막에 남긴 상처</h4>
+
+                        <div class="space-y-8">
+                            <!-- 문제 파악 -->
+                            <section>
+                                <h5 class="text-xl font-bold bg-gray-200 inline-block px-3 py-1 rounded mb-4">1. 문제 파악하기</h5>
+                                <div class="pl-4 border-l-4 border-gray-300 space-y-3">
+                                    <p><strong>[현황 파악]</strong> 전 세계적으로 매년 약 1천억 벌의 옷이 만들어지고, 그중 73%가 버려집니다. 특히 칠레 아타카마 사막에는 매년 3만 9천 톤의 헌 옷이 버려져 거대한 쓰레기 산을 이루고 있습니다.</p>
+                                    <p><strong>[원인 분석]</strong> 유행에 맞춰 옷을 싸고 빠르게 대량으로 찍어내고 소비하는 '패스트패션' 산업 구조와 우리의 쉽게 버리는 소비 습관이 주요 원인입니다.</p>
+                                    <p><strong>[영향 범위]</strong> 화학섬유로 된 옷은 썩는 데 200년이 걸려 토양과 지하수를 오염시킵니다. 또한 옷 산에서 발생하는 화재로 인해 유독가스가 나와 현지 주민들의 호흡기 건강을 심각하게 위협합니다.</p>
+                                    <p class="text-red-600 bg-red-50 p-2 rounded"><strong>[지역 간 비교]</strong> 한국, 미국 등 선진국은 유행에 따라 옷을 대량으로 소비한 뒤 '기부'라는 이름으로 수출하여 책임을 회피합니다. 반면 칠레, 가나 같은 개발도상국은 이 쓰레기를 처리할 능력이 없어 국토가 병들고 주민들이 피해를 온전히 떠안는 불평등이 발생하고 있습니다.</p>
+                                </div>
+                            </section>
+
+                            <!-- 실천 방안 -->
+                            <section>
+                                <h5 class="text-xl font-bold bg-gray-200 inline-block px-3 py-1 rounded mb-4">2. 실천 방안 세우기 (해결책)</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded shadow border border-gray-200">
+                                        <h6 class="font-bold text-blue-600 mb-2">🌱 개인적 차원</h6>
+                                        <p class="text-sm">유행하는 옷을 싸다고 충동구매하지 않겠습니다. 옷을 살 때는 중고 거래 앱(당근마켓 등)을 먼저 확인하고, 있는 옷을 다양하게 코디해 입어 옷의 수명을 늘리겠습니다.</p>
+                                        <span class="text-xs text-gray-500 block mt-2">(평가요소: 구체적이고 현실적인 중학생의 행동)</span>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow border border-gray-200">
+                                        <h6 class="font-bold text-green-600 mb-2">🏫 지역사회 (학교) 차원</h6>
+                                        <p class="text-sm">학교 축제 때 '아나바다 옷 교환 장터' 부스를 운영하겠습니다. 반 친구들과 안 입는 옷을 가져와 교환하면 쓰레기를 줄일 수 있습니다.</p>
+                                        <span class="text-xs text-gray-500 block mt-2">(평가요소: 학교에서 실현 가능한 공동체적 노력)</span>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow border border-gray-200">
+                                        <h6 class="font-bold text-orange-600 mb-2">🇰🇷 국가적 차원</h6>
+                                        <p class="text-sm">정부는 의류 기업이 팔리지 않은 재고 옷을 불태워 버리는 것을 금지하는 '재고 폐기 금지법'을 만들어야 합니다. 또한 친환경 섬유를 쓰는 기업에게 세금 혜택을 주어야 합니다.</p>
+                                        <span class="text-xs text-gray-500 block mt-2">(평가요소: 제도를 통한 지속가능성 확보)</span>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow border border-gray-200">
+                                        <h6 class="font-bold text-purple-600 mb-2">🌍 국제적 차원</h6>
+                                        <p class="text-sm">국제사회는 선진국이 쓰레기 같은 헌 옷을 개도국에 무단으로 수출하지 못하도록 '폐기물 국가 간 이동 협약(바젤 협약 등)'을 더 엄격하게 감시하고 제재해야 합니다.</p>
+                                        <span class="text-xs text-gray-500 block mt-2">(평가요소: 국가 간 불평등을 해결하는 거시적 접근)</span>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="mt-8 text-center text-gray-500 text-sm border-t pt-4">
+                            이 예시를 바탕으로 너희가 고른 주제(식량, 전자쓰레기 등)에 맞게 내용을 바꿔서 조사해 봐!
+                        </div>
+                    </div>
+                </div>
+                <!-- End Perfect Example -->
+
+            </div>
+        </section>
+
+        <footer class="mt-20 text-center text-gray-500 text-sm font-bold pb-10">
+            <p>🌱 너희들의 멋진 수행평가 발표를 응원해! 화이팅! 🌱</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Webtoon to Main Screen Transition
+        function startInvestigation() {
+            const intro = document.getElementById('intro-screen');
+            const main = document.getElementById('main-content');
+            
+            intro.style.opacity = '0';
+            
+            setTimeout(() => {
+                intro.style.display = 'none'; 
+                main.classList.remove('hidden'); 
+                window.scrollTo(0, 0); 
+                main.style.animation = 'fadeIn 1s ease-out';
+            }, 800);
+        }
+
+        // Toggle Example Section
+        function toggleExample() {
+            const exampleDiv = document.getElementById('perfect-example');
+            const arrowIcon = document.getElementById('arrow-icon');
+            
+            if (exampleDiv.classList.contains('hidden')) {
+                exampleDiv.classList.remove('hidden');
+                arrowIcon.classList.add('rotate-180');
+                // Scroll to example
+                setTimeout(() => {
+                    exampleDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            } else {
+                exampleDiv.classList.add('hidden');
+                arrowIcon.classList.remove('rotate-180');
+            }
+        }
+        
+        // Add fadeIn keyframe
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
